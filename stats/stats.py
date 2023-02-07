@@ -13,3 +13,6 @@ class Stats:
         elif value < 1:
             return 0
         return self.count_dict[value-1]
+
+    def between(self, low_value, high_value):
+        return self.less(high_value + 1) - self.less(low_value)
