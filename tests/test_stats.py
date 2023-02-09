@@ -1,10 +1,11 @@
 from ..stats.datacapture import DataCapture
+from ..stats.stats import Stats
 import pytest
 from typing import List
 
 
 @pytest.fixture()
-def get_data_captured() -> List:
+def get_data_captured() -> Stats:
     capture = DataCapture()
     capture.add(0)
     capture.add(9)
@@ -13,12 +14,12 @@ def get_data_captured() -> List:
     capture.add(6)
     stats = capture.build_stats()
 
-    return [capture, stats]
+    return stats
 
 
 class TestStats():
     def test_less(self, get_data_captured: List):
-        _, stats = get_data_captured
+        stats = get_data_captured
 
         assert stats.less(0) == 0, "Negatives should not be supported"
         assert stats.less(9) == 4
@@ -30,7 +31,7 @@ class TestStats():
             stats.less('invalid string')
 
     def test_greater(self, get_data_captured: List):
-        _, stats = get_data_captured
+        stats = get_data_captured
 
         assert stats.greater(0) == 4
         assert stats.greater(9) == 0
@@ -43,7 +44,7 @@ class TestStats():
 
 
     def test_between(self, get_data_captured: List):
-        _, stats = get_data_captured
+        stats = get_data_captured
 
         assert stats.between(0, 9) == 5
         assert stats.between(0, 0) == 1
