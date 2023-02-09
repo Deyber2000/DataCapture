@@ -49,3 +49,4 @@ At the repo root and with the environment active, run the tests with:
 ``` shell
 pytest tests
 ```
+This project is licensed under the terms of the MIT license.
