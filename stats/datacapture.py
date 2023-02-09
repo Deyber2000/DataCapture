@@ -2,6 +2,7 @@ from annotated_types import Gt
 from .stats import Stats
 from typing import Annotated
 
+
 class DataCapture:
     """
     A class for capturing data and building statistics
@@ -11,16 +12,28 @@ class DataCapture:
     """
 
     def __init__(self):
+        """Instantiate objects for data capture"""
         self.records = {}
         self.max_number = 0
 
     def add(self, value: Annotated[int, Gt(0)]) -> None:
-        if value < 0 or type(value) is not int:
+        """Adds number to process statistics
+        Parameters
+        ----------
+        value : int
+            Number to be added 
+        Raises
+        ------
+        ValueError
+            If value is not a positive integer.
+        """
+        if type(value) is not int and value < 0:
             raise ValueError('Work with Positive integers Only')
         self.max_number = value if value > self.max_number else self.max_number
         self.records[value] = self.records.get(value, 0) + 1
 
     def build_stats(self) -> Stats:
+        """Generate statistics from added numbers"""
         count_dict = {}
         current_count = 0
         for i in range(self.max_number + 1):
