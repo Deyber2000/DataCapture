@@ -27,7 +27,7 @@ class DataCapture:
         ValueError
             If value is not a positive integer.
         """
-        if type(value) is not int and value < 0:
+        if type(value) is not int or value < 0:
             raise ValueError('Work with Positive integers Only')
         self.max_number = value if value > self.max_number else self.max_number
         self.records[value] = self.records.get(value, 0) + 1
