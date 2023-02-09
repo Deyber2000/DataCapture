@@ -18,7 +18,7 @@ def get_data_captured() -> Stats:
 
 
 class TestStats():
-    def test_less(self, get_data_captured: List):
+    def test_less(self, get_data_captured: Stats):
         stats = get_data_captured
 
         assert stats.less(0) == 0, "Negatives should not be supported"
@@ -30,7 +30,7 @@ class TestStats():
         with pytest.raises(TypeError):
             stats.less('invalid string')
 
-    def test_greater(self, get_data_captured: List):
+    def test_greater(self, get_data_captured: Stats):
         stats = get_data_captured
 
         assert stats.greater(0) == 4
@@ -43,7 +43,7 @@ class TestStats():
             stats.greater('invalid string')
 
 
-    def test_between(self, get_data_captured: List):
+    def test_between(self, get_data_captured: Stats):
         stats = get_data_captured
 
         assert stats.between(0, 9) == 5
